@@ -1,0 +1,28 @@
+DELETE FROM project_programmer WHERE project_id > 0;
+DELETE FROM project_manager WHERE project_id > 0;
+DELETE FROM programmer WHERE id > 0;
+DELETE FROM manager WHERE id > 0;
+DELETE FROM project WHERE id > 0;
+
+ALTER TABLE programmer AUTO_INCREMENT=1;
+ALTER TABLE manager AUTO_INCREMENT=1;
+ALTER TABLE project AUTO_INCREMENT=1;
+
+INSERT INTO programmer VALUES(1, 'DEVELOPER', 'JUNIOR', 'JON');
+INSERT INTO programmer VALUES(2, 'QA', 'MIDDLE', 'SAM');
+INSERT INTO programmer VALUES(3, 'DEVOPS', 'SENIOR', 'KING');
+
+INSERT INTO manager VALUES(1, 'DEVOPS', 'SENIOR', 'BOSS');
+
+INSERT INTO project VALUES(1, 'EASY PROJECT');
+INSERT INTO project VALUES(2, 'HARD PROJECT');
+
+INSERT INTO project_programmer VALUES(1, 1);
+INSERT INTO project_programmer VALUES(1, 2);
+INSERT INTO project_programmer VALUES(2, 2);
+
+INSERT INTO project_manager VALUES(1, 1);
+
+ALTER TABLE programmer AUTO_INCREMENT=10;
+ALTER TABLE manager AUTO_INCREMENT=10;
+ALTER TABLE project AUTO_INCREMENT=10;
