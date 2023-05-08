@@ -52,8 +52,7 @@ public class ProgrammerController{
     @ApiResponse(responseCode = "404", description = "Not found", content = @Content)
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteById(@PathVariable Integer id){
-        Optional<Programmer> programmer = programmerRepository.findById(id);
-        if(programmer.isEmpty()){
+        if(!programmerRepository.existsById(id)){
             throw new NotFoundException("Programmer not found with id:" + id);
         }
         programmerRepository.deleteById(id);
@@ -68,7 +67,7 @@ public class ProgrammerController{
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Programmer programmer){
         if(id == null || !id.equals(programmer.getId()))
             throw new BadRequestException("Bad request: invalid data");
-        if(programmerRepository.findById(id).isEmpty())
+        if(!programmerRepository.existsById(id))
             throw new NotFoundException("Project not found with id:" + id);
         programmerRepository.save(programmer);
         return ResponseEntity.ok().body(programmer);

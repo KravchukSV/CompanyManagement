@@ -55,8 +55,7 @@ public class ProjectController{
     @ApiResponse(responseCode = "404", description = "Not found", content = @Content)
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Integer id){
-        Optional<Project> project = projectRepository.findById(id);
-        if(project.isEmpty()){
+        if(!projectRepository.existsById(id)){
             throw new NotFoundException("Project not found with id:" + id);
         }
         projectServer.deleteById(id);
@@ -71,7 +70,7 @@ public class ProjectController{
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Project project){
         if(id == null || !id.equals(project.getId()))
             throw new BadRequestException("Bad request: invalid data");
-        if(projectRepository.findById(id).isEmpty())
+        if(!projectRepository.existsById(id))
             throw new NotFoundException("Project not found with id:" + id);
         projectServer.update(project);
         return ResponseEntity.ok().body(project);

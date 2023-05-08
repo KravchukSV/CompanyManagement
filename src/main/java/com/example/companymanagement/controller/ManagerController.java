@@ -52,8 +52,7 @@ public class ManagerController{
     @ApiResponse(responseCode = "404", description = "Not found", content = @Content)
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteById(@PathVariable Integer id){
-        Optional<Manager> manager = managerRepository.findById(id);
-        if(manager.isEmpty()){
+        if(!managerRepository.existsById(id)){
             throw new NotFoundException("Manager not found with id:" + id);
         }
         managerRepository.deleteById(id);
@@ -68,7 +67,7 @@ public class ManagerController{
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Manager manager){
         if(id == null || !id.equals(manager.getId()))
             throw new BadRequestException("Bad request: invalid data");
-        if(managerRepository.findById(id).isEmpty())
+        if(!managerRepository.existsById(id))
             throw new NotFoundException("Manager not found with id:" + id);
         managerRepository.save(manager);
         return ResponseEntity.ok().body(manager);
