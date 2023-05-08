@@ -74,7 +74,7 @@ public class ProgrammerController{
     }
 
     @Operation(summary = "Create", description = "Create new programmer")
-    @ApiResponse(responseCode = "200", description = "ok")
+    @ApiResponse(responseCode = "201", description = "created")
     @ApiResponse(responseCode = "400", description = "bad request")
     @ApiResponse(responseCode = "404", description = "Not found", content = @Content)
     @PostMapping
