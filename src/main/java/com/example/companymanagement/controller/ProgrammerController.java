@@ -31,7 +31,6 @@ public class ProgrammerController{
     @ApiResponse(responseCode = "200", description = "All ok")
     @GetMapping
     Collection<Programmer> findAll(){
-        System.out.println("OK");
         Collection<Programmer> programmers = (Collection<Programmer>) programmerRepository.findAll();
         return programmers;
     }
